@@ -11,11 +11,18 @@ public class AppConfig {
     @Value("${app.short-url-length}")
     private int shortUrlLength;
 
+    @Value("${app.encode-retries}")
+    private int encodeRetries;
+
     public String getBaseUrl() {
         return baseUrl;
     }
 
     public int getShortUrlLength() {
         return shortUrlLength;
+    }
+
+    public int getEncodeRetries() {
+        return encodeRetries;
     }
 }

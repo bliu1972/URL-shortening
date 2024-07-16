@@ -23,8 +23,21 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
 
     @Override
     public String encode(String originalUrl) {
-        long id = counter.incrementAndGet();
-        String shortenedUrl = Base62Util.encode(id, appConfig.getShortUrlLength());
+        int maxRetries = appConfig.getEncodeRetries();
+        int attempts = 0;
+    
+        String shortenedUrl;
+
+        do {
+            long id = counter.incrementAndGet();
+            shortenedUrl = Base62Util.encode(id, appConfig.getShortUrlLength());
+            attempts++;
+        } while (urlStorage.containsKey(shortenedUrl) && attempts < maxRetries);
+    
+        if (urlStorage.containsKey(shortenedUrl)) {
+            throw new RuntimeException("Failed to generate a unique short URL after " + maxRetries + " attempts");
+        }
+
         urlStorage.put(shortenedUrl, originalUrl);
         return appConfig.getBaseUrl() + shortenedUrl;
     }

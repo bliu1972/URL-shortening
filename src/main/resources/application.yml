@@ -16,6 +16,7 @@ app:
   base-url: https://myshort.url/
   short-url-length: 6
   enable-basic-auth: true
+  encode-retries: 3
 logging:
   level:
     root: INFO  # Default level for all loggers
