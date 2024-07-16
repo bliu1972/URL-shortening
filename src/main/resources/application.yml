@@ -1,0 +1,24 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: URL_Shortener
+  security:
+    enabled: false
+    user:
+      name: user
+      password: password
+    authRole: "USER"
+    # CSRF settings
+    csrf:
+      enabled: false  # Set to false to disable CSRF protection
+app:
+  base-url: https://myshort.url/
+  short-url-length: 6
+  enable-basic-auth: true
+logging:
+  level:
+    root: INFO  # Default level for all loggers
+    '[org.springframework.web]': INFO  # Debug messages for Spring Web layer
+    '[org.springframework.security]': INFO  # Debug messages for Spring Security
+    '[com.example.urlshortener]': INFO  # Debug messages for your own package
