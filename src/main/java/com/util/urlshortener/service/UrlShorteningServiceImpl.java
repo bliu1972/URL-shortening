@@ -28,6 +28,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
     
         String shortenedUrl;
 
+        // give maxRetries if shortenedUrl is generated duplicate
         do {
             long id = counter.incrementAndGet();
             shortenedUrl = Base62Util.encode(id, appConfig.getShortUrlLength());
@@ -39,6 +40,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
         }
 
         urlStorage.put(shortenedUrl, originalUrl);
+
         return appConfig.getBaseUrl() + shortenedUrl;
     }
 
