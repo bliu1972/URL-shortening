@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
+- [Design](#design)
 - [Features](#features)
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
@@ -17,6 +18,10 @@
 
 The URL Shortener Service is a simple web application that allows users to shorten long URLs. It provides functionality to create shortened URLs and retrieve the original URLs using the shortened versions.
 
+## Design
+
+Refer to "URL Shortener.pptx" in this repository for all the design considerations
+
 ## Features
 
 - Encode long URLs into shorter ones
@@ -28,6 +33,7 @@ The URL Shortener Service is a simple web application that allows users to short
 - Java 17
 - Spring Boot
 - Maven
+- Docker
 
 ## Getting Started
 
@@ -36,6 +42,7 @@ The URL Shortener Service is a simple web application that allows users to short
 - Java 17
 - Maven
 - Git
+- Docker
 
 ### Installation
 
