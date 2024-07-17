@@ -10,7 +10,6 @@
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
 - [API Endpoints](#api-endpoints)
-- [Deployment](#deployment)
 - [Contributing](#contributing)
 - [License](#license)
 

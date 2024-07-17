@@ -5,8 +5,8 @@ import com.util.urlshortener.util.Base62Util;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -14,7 +14,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
 
     private AppConfig appConfig;
 
-    private final Map<String, String> urlStorage = new HashMap<>();
+    private final Map<String, String> urlStorage = new ConcurrentHashMap<>();
     private final AtomicLong counter = new AtomicLong(0);
 
     public UrlShorteningServiceImpl(AppConfig appConfig) {
