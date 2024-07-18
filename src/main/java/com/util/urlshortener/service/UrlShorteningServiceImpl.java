@@ -15,6 +15,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
     private AppConfig appConfig;
 
     private final Map<String, String> urlStorage = new ConcurrentHashMap<>();
+    private final Map<String, String> reverseUrlStorage = new ConcurrentHashMap<>();
     private final AtomicLong counter = new AtomicLong(0);
 
     public UrlShorteningServiceImpl(AppConfig appConfig) {
@@ -23,6 +24,14 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
 
     @Override
     public String encode(String originalUrl) {
+        // Check if the original URL is already encoded
+System.out.println("Original url=" + originalUrl);
+System.out.println("reverseUrlStorage url=" + reverseUrlStorage);
+
+        if (reverseUrlStorage.containsKey(originalUrl)) {
+            return appConfig.getBaseUrl() + reverseUrlStorage.get(originalUrl);
+        }
+
         int maxRetries = appConfig.getEncodeRetries();
         int attempts = 0;
     
@@ -40,6 +49,7 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
         }
 
         urlStorage.put(shortenedUrl, originalUrl);
+        reverseUrlStorage.put(originalUrl, shortenedUrl);
 
         return appConfig.getBaseUrl() + shortenedUrl;
     }
