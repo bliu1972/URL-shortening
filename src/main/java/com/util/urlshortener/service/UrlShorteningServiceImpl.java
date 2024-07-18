@@ -25,9 +25,6 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
     @Override
     public String encode(String originalUrl) {
         // Check if the original URL is already encoded
-System.out.println("Original url=" + originalUrl);
-System.out.println("reverseUrlStorage url=" + reverseUrlStorage);
-
         if (reverseUrlStorage.containsKey(originalUrl)) {
             return appConfig.getBaseUrl() + reverseUrlStorage.get(originalUrl);
         }
