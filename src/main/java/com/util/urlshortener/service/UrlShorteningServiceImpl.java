@@ -45,8 +45,13 @@ public class UrlShorteningServiceImpl implements UrlShorteningService {
             throw new RuntimeException("Failed to generate a unique short URL after " + maxRetries + " attempts");
         }
 
-        urlStorage.put(shortenedUrl, originalUrl);
-        reverseUrlStorage.put(originalUrl, shortenedUrl);
+        synchronized(this) {
+            if (urlStorage.putIfAbsent(shortenedUrl, originalUrl) != null) {
+                throw new RuntimeException("Failed to generate a unique short URL, already exists: shortenedUrl="
+                    + shortenedUrl + ", originalUrl=" + originalUrl);
+            }
+            reverseUrlStorage.putIfAbsent(originalUrl, shortenedUrl);
+        }
 
         return appConfig.getBaseUrl() + shortenedUrl;
     }
